@@ -1,11 +1,6 @@
 console.log("js loaded")
 document.getElementById("filler").remove()
 
-const d = new Date()
-const birthDate = 20060809
-var currentDateRange = configureDate(d) - birthDate
-var hello = document.getElementById("helloText")
-
 function configureDate(date) {
     var toReturn = null
 
@@ -23,8 +18,31 @@ function getAge(dateRange) {
     return mathDate
 }
 
-var colinAge = getAge(currentDateRange)
+function getColinAge() {
+    d = new Date()
+    console.log(d)
+    currentDateRange = configureDate(d) - birthDate
+    return getAge(currentDateRange)
+}
+
+var d
+const birthDate = 20060809
+var currentDateRange
+var hello = document.getElementById("helloText")
+
+var colinAge = getColinAge()
 
 console.log("Calculated age: " + colinAge)
 
 hello.innerHTML = hello.innerHTML.replace("[{1}]", colinAge)
+var previousAge = colinAge.toString()
+
+var mouseDown = false;
+document.body.onmousedown = function() { 
+  mouseDown = true;
+  colinAge = colinAge == previousAge ? colinAge : getColinAge()
+  hello.innerHTML = hello.innerHTML.replace(previousAge, colinAge)
+}
+document.body.onmouseup = function() {
+  mouseDown = false;
+}
