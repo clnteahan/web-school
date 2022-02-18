@@ -46,3 +46,7 @@ document.body.onmousedown = function() {
 document.body.onmouseup = function() {
   mouseDown = false;
 }
+
+function openTab(url) {
+    window.open(url, "_blank")
+}
